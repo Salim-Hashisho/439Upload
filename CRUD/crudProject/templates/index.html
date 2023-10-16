@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CRUD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar bg-dark">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1 text-white">Crud Operations</span>
+      </div>
+    </nav>
+
+    <div class="mt-5 p-3">
+      <div class="row">
+        <div class="col-md-3 mb-3 me-3 p-3">
+          <h2 class="text-white bg-dark text-center p-3">Insert Details</h2>
+          <form action="/insert" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+              <input type="number" name="id" id="id" placeholder="Id" min="1" class="form-control mt-2" required>
+            </div>
+
+            <div class="form-group">
+              <input type="text" name="name" id="name" placeholder="Name" class="form-control mt-2" required>
+            </div>
+
+            <div class="form-group">
+              <input type="number" name="age" id="age" placeholder="Age" min="0" max="150" class="form-control mt-2" required>
+            </div>
+
+            <div class="form-group">
+              <input type="date" name="dob" id="dob" class="form-control mt-2" required>
+            </div>
+            
+            <div class="form-group">
+              <input type="email" name="email" id="email" placeholder="Email" class="form-control mt-2" required>
+            </div>
+
+            <div class="form-group">
+              <input type="number" name="number" id="number" placeholder="Number" min="1" class="form-control mt-2" required>
+            </div>
+
+            <div class="form-group">
+              <input type="text" name="address" id="address" placeholder="Address" class="form-control mt-2" required>
+            </div>
+            
+            <div class="form-group">
+              <select class="form-select mt-2" id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <input type="file" name="image" id="image" class="form-control mt-2" required>
+            </div>
+
+            <div class="d-grid mt-2">
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-8 p-3">
+          <h2 class="text-white bg-dark text-center p-3"> Contact List </h2>
+          <table class="table">
+            <thead class="table-dark">
+              <tr class="text-center">
+                <th scope="col">id</th>
+                <th scope="col">name</th>
+                <th scope="col">age</th>
+                <th scope="col">dob</th>
+                <th scope="col">email</th>
+                <th scope="col">number</th>
+                <th scope="col">address</th>
+                <th scope="col">gender</th>
+                <th scope="col">Image</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for d in data %}
+                <tr class="text-center">
+                  <th scope="row">{{d.id}}</th>
+                  <td>{{d.name}}</td>
+                  <td>{{d.age}}</td>
+                  <td>{{d.dob}}</td>
+                  <td>{{d.email}}</td>
+                  <td>{{d.number}}</td>
+                  <td>{{d.address}}</td>
+                  <td>{{d.gender}}</td>
+                  <td><a href="media/{{d.image}}">{{d.image}}</td>
+                  <td>
+                    <a type="button" href="/update/{{d.id}}" class="btn btn-primary"></a>
+                  </td>
+                  <td>
+                    <a type="button" href="/delete/{{d.id}}" class="btn btn-danger"></a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div>
+      {{message}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> {% endcomment %}
+  </body>
+</html>
